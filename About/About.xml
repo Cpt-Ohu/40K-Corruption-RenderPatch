@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Corruption - Pawn Renderer Patch</name>
+  <author>Ohu</author>
+  <targetVersion>0.16.1393</targetVersion>
+  <description>A patch for pawnrendering adjusted for AlienRaces as well as Children and Pregnancy.</description>
+</ModMetaData>

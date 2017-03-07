@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ThingDefs>
+
+  <ThingDef>
+    <defName>PawnRendererInit</defName>
+    <category>Building</category>
+    <menuHidden>true</menuHidden>
+    <label>ModInitializerCorruption</label>
+    <thingClass>_40KPawnRenderer.ModInitializer</thingClass>
+    <inspectorTabs>
+      <li>_40KPawnRenderer.ModInitializer</li>
+    </inspectorTabs>
+  </ThingDef>  
+
+</ThingDefs>
