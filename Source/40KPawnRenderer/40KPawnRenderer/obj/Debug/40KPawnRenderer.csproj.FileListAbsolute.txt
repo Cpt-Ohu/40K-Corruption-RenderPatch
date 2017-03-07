@@ -8,3 +8,8 @@ D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\YaWH40K-PawnRenderer\Assemblies\4
 D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\YaWH40K-PawnRenderer\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.csprojResolveAssemblyReference.cache
 D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\YaWH40K-PawnRenderer\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.dll
 D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\YaWH40K-PawnRenderer\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.pdb
+D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.csprojResolveAssemblyReference.cache
+D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.dll
+D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.pdb
+D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Assemblies\40KPawnRenderer.dll
+D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Assemblies\40KPawnRenderer.pdb
