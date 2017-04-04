@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
+using AlienRace;
 
 
 namespace _40KPawnRenderer
@@ -15,10 +16,13 @@ namespace _40KPawnRenderer
     [StaticConstructorOnStartup]
     static class HarmonyPatches
     {
+        /// <summary>
+        /// Drawing Chaos overlays, hediffs and pauldrons, adjusted for Alien Race
+        /// </summary>
         static HarmonyPatches()
         {
             HarmonyInstance harmony = HarmonyInstance.Create("rimworld.ohu.pawnRenderer.main");
-            harmony.Patch(AccessTools.Method(typeof(PawnRenderer), "RenderPawnInternal", new Type[] { typeof(Vector3), typeof(Quaternion), typeof(bool), typeof(Rot4), typeof(Rot4), typeof(RotDrawMode), typeof(bool) }), new HarmonyMethod(typeof(HarmonyPatches), nameof(RenderPawnInternal)), null);
+            harmony.Patch(AccessTools.Method(typeof(PawnRenderer), "RenderPawnInternal", new Type[] { typeof(Vector3), typeof(Quaternion), typeof(bool), typeof(Rot4), typeof(Rot4), typeof(RotDrawMode), typeof(bool) }), null, new HarmonyMethod(typeof(HarmonyPatches), nameof(RenderPawnInternal)), null);
         }
 
         internal static List<HediffComp_DrawImplant> implantDrawers(Pawn pawn)
@@ -35,9 +39,13 @@ namespace _40KPawnRenderer
             return list;
         }
 
-        private static bool RenderPawnInternal(PawnRenderer __instance, Vector3 rootLoc, Quaternion quat, bool renderBody, Rot4 bodyFacing, Rot4 headFacing, RotDrawMode bodyDrawType = RotDrawMode.Fresh, bool portrait = false)
+        private static void RenderPawnInternal(PawnRenderer __instance, Vector3 rootLoc, Quaternion quat, bool renderBody, Rot4 bodyFacing, Rot4 headFacing, RotDrawMode bodyDrawType = RotDrawMode.Fresh, bool portrait = false)
         {
             Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
+            if (!pawn.def.race.Humanlike)
+            {
+                return;
+            }
 
             Corruption.CompPsyker compPsyker = pawn.TryGetComp<CompPsyker>();
             List<HediffComp_DrawImplant> implantDrawers = HarmonyPatches.implantDrawers(pawn);
@@ -69,20 +77,53 @@ namespace _40KPawnRenderer
                 }
                 else
                 {
-                    if (pawn.RaceProps.Humanlike)
+                    ThingDef_AlienRace alienDef = pawn.def as ThingDef_AlienRace;
+                    if (alienDef != null)
                     {
-                        mesh = MeshPool.humanlikeBodySet.MeshAt(bodyFacing);
+                        Mesh mesh2;
+                        if (bodyDrawType == RotDrawMode.Rotting)
+                        {
+                            if (__instance.graphics.dessicatedGraphic.ShouldDrawRotated)
+                            {
+                                mesh2 = MeshPool.GridPlane(portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.CustomPortraitDrawSize : alienDef.alienRace.generalSettings.alienPartGenerator.CustomDrawSize);
+                            }
+                            else
+                            {
+                                Vector2 size = portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.CustomPortraitDrawSize : alienDef.alienRace.generalSettings.alienPartGenerator.CustomDrawSize;
+                                if (bodyFacing.IsHorizontal)
+                                {
+                                    size = size.Rotated();
+                                }
+                                if (bodyFacing == Rot4.West && (__instance.graphics.dessicatedGraphic.data == null || __instance.graphics.dessicatedGraphic.data.allowFlip))
+                                {
+                                    mesh = MeshPool.GridPlaneFlip(size);
+                                }
+                                mesh = MeshPool.GridPlane(size);
+                            }
+                        }
+                        else
+                        {
+                            mesh = (portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.bodyPortraitSet.MeshAt(bodyFacing) : alienDef.alienRace.generalSettings.alienPartGenerator.bodySet.MeshAt(bodyFacing));
+                        }
                     }
                     else
                     {
-                        mesh = __instance.graphics.nakedGraphic.MeshAt(bodyFacing);
+
+                        if (pawn.RaceProps.Humanlike)
+                        {
+                            mesh = MeshPool.humanlikeBodySet.MeshAt(bodyFacing);
+                        }
+                        else
+                        {
+                            mesh = __instance.graphics.nakedGraphic.MeshAt(bodyFacing);
+                        }
                     }
                     List<Material> list = __instance.graphics.MatsBodyBaseAt(bodyFacing, bodyDrawType);
                     for (int i = 0; i < list.Count; i++)
                     {
-                        Material damagedMat = __instance.graphics.flasher.GetDamagedMat(list[i]);
-                        GenDraw.DrawMeshNowOrLater(mesh, loc, quat, damagedMat, portrait);
-                        loc.y += 0.003f;
+         //               Material damagedMat = __instance.graphics.flasher.GetDamagedMat(list[i]);
+         //               GenDraw.DrawMeshNowOrLater(mesh, loc, quat, damagedMat, portrait);
+                        loc.y += 0.005f;
                         if (i == 0)
                         {
                             if (drawChaos)
@@ -98,7 +139,7 @@ namespace _40KPawnRenderer
                                     }
                                 }
                                 GenDraw.DrawMeshNowOrLater(mesh, loc, quat, markMat, portrait);
-                                loc.y += 0.003f;
+                                loc.y += 0.005f;
                             }
                         }
 
@@ -106,7 +147,7 @@ namespace _40KPawnRenderer
                         {
                             Vector3 drawLoc = rootLoc;
                             drawLoc.y += 0.02f;
-                            Traverse.Create(__instance).Field("woundOverlays").GetValue<PawnWoundDrawer>().RenderOverBody(drawLoc, mesh, quat, portrait);
+        //                    Traverse.Create(__instance).Field("woundOverlays").GetValue<PawnWoundDrawer>().RenderOverBody(drawLoc, mesh, quat, portrait);
                         }
                     }
                 }
@@ -127,12 +168,12 @@ namespace _40KPawnRenderer
                     Vector3 b = quat * __instance.BaseHeadOffsetAt(headFacing);
                     Mesh mesh2 = MeshPool.humanlikeHeadSet.MeshAt(headFacing);
                     Material mat = __instance.graphics.HeadMatAt(headFacing, bodyDrawType);
-                    GenDraw.DrawMeshNowOrLater(mesh2, a + b, quat, mat, portrait);
+        //            GenDraw.DrawMeshNowOrLater(mesh2, a + b, quat, mat, portrait);
                     if (drawChaos)
                     {
                         Material headMarkMat = (AfflictionDrawerUtility.GetHeadGraphic(pawn, patronName).MatAt(bodyFacing));
-                        vector.y += 0.005f;
-                        GenDraw.DrawMeshNowOrLater(mesh2, vector, quat, headMarkMat, portrait);
+                     //   vector.y += 0.005f;
+                        GenDraw.DrawMeshNowOrLater(mesh2, a+b+new Vector3(0f, 0.004f, 0f), quat, headMarkMat, portrait);
                     }
 
                     Vector3 loc2 = rootLoc + b;
@@ -147,37 +188,38 @@ namespace _40KPawnRenderer
                             flag = true;
                             Material material = apparelGraphics[j].graphic.MatAt(bodyFacing, null);
                             material = __instance.graphics.flasher.GetDamagedMat(material);
-                            GenDraw.DrawMeshNowOrLater(mesh3, loc2, quat, material, portrait);
+             //               GenDraw.DrawMeshNowOrLater(mesh3, loc2, quat, material, portrait);
                         }
 
                         if (!flag && bodyDrawType != RotDrawMode.Dessicated)
                         {
                             Mesh mesh4 = __instance.graphics.HairMeshSet.MeshAt(headFacing);
                             Material mat2 = __instance.graphics.HairMatAt(headFacing);
-                            GenDraw.DrawMeshNowOrLater(mesh4, loc2, quat, mat2, portrait);
+         //                   GenDraw.DrawMeshNowOrLater(mesh4, loc2, quat, mat2, portrait);
                         }
                     }
                     if (renderBody)
                     {
                         for (int k = 0; k < __instance.graphics.apparelGraphics.Count; k++)
                         {
+                            Material pauldronMat;
+                            if (CompPauldronDrawer.ShouldDrawPauldron(pawn, __instance.graphics.apparelGraphics[k].sourceApparel, bodyFacing, out pauldronMat))
+                            {
+                                if (pawn.ageTracker.CurLifeStageIndex == 2)
+                                {
+                                    pauldronMat.mainTextureScale = new Vector2(1.00f, 1.22f);
+                                    pauldronMat.mainTextureOffset = new Vector2(0, -0.1f);
+                                }
+                                vector.y += 0.035f;
+                                GenDraw.DrawMeshNowOrLater(mesh, vector, quat, pauldronMat, portrait);
+                            }
                             ApparelGraphicRecord apparelGraphicRecord = __instance.graphics.apparelGraphics[k];
                             if (apparelGraphicRecord.sourceApparel.def.apparel.LastLayer == ApparelLayer.Shell)
                             {
-                                Material material2 = apparelGraphicRecord.graphic.MatAt(bodyFacing, null);
-                                material2 = __instance.graphics.flasher.GetDamagedMat(material2);
-                                GenDraw.DrawMeshNowOrLater(mesh, vector, quat, material2, portrait);
-                                Material pauldronMat;
-                                if (CompPauldronDrawer.ShouldDrawPauldron(pawn, __instance.graphics.apparelGraphics[k].sourceApparel, bodyFacing, out pauldronMat))
-                                {
-                                    if (pawn.ageTracker.CurLifeStageIndex == 2)
-                                    {
-                                        pauldronMat.mainTextureScale = new Vector2(1.00f, 1.22f);
-                                        pauldronMat.mainTextureOffset = new Vector2(0, -0.1f);
-                                    }
-                                    vector.y += 0.005f;
-                                    GenDraw.DrawMeshNowOrLater(mesh, vector, quat, pauldronMat, portrait);
-                                }
+                     //           Material material2 = apparelGraphicRecord.graphic.MatAt(bodyFacing, null);
+                     //           material2 = __instance.graphics.flasher.GetDamagedMat(material2);
+                     //           GenDraw.DrawMeshNowOrLater(mesh, vector, quat, material2, portrait);
+
                             }
                             if (!pawn.Dead)
                             {
@@ -202,30 +244,8 @@ namespace _40KPawnRenderer
                             }
                         }
                     }
-                    if (!portrait && pawn.RaceProps.Animal && pawn.inventory != null && pawn.inventory.innerContainer.Count > 0)
-                    {
-                        Graphics.DrawMesh(mesh, vector, quat, __instance.graphics.packGraphic.MatAt(pawn.Rotation, null), 0);
-                    }
-                    if (!portrait)
-                    {
-                        Traverse.Create(__instance).Method("DrawEquipment", new object[] { rootLoc });
-                        if (pawn.apparel != null)
-                        {
-                            List<Apparel> wornApparel = pawn.apparel.WornApparel;
-                            for (int l = 0; l < wornApparel.Count; l++)
-                            {
-                                wornApparel[l].DrawWornExtras();
-                            }
-                        }
-                        Vector3 bodyLoc = rootLoc;
-                        bodyLoc.y += 0.0449999981f;
-                        Traverse.Create(__instance).Field("statusOverlays").GetValue<PawnHeadOverlays>().RenderStatusOverlays(bodyLoc, quat, MeshPool.humanlikeHeadSet.MeshAt(headFacing));
-                    }
-
                 }
-            }
-
-            return false;
+            }            
         }
     }
 }

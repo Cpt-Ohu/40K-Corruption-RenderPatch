@@ -32,18 +32,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="0Harmony, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Steam\SteamApps\workshop\content\294100\839005762\Assemblies\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienRace">
+      <HintPath>..\..\..\..\AlienRaces-2.1.1\Assemblies\AlienRace.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\..\..\..\Spiele\Steam\SteamApps\common\RimWorld\RimWorldWin_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Corruption">
       <HintPath>..\..\..\..\..\..\..\..\Spiele\Steam\SteamApps\common\RimWorld\Mods\YaWH40Km-Public_A16\Assemblies\Corruption.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FactionColors">
       <HintPath>..\..\..\..\..\..\..\..\Spiele\Steam\SteamApps\common\RimWorld\Mods\YaWH40Km-Public_A16\Assemblies\FactionColors.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,6 +60,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\..\..\..\Spiele\Steam\SteamApps\common\RimWorld\RimWorldWin_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

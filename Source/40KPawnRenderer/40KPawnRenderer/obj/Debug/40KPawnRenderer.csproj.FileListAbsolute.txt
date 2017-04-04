@@ -13,3 +13,8 @@ D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Sourc
 D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.pdb
 D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Assemblies\40KPawnRenderer.dll
 D:\Modding\rimworld\Wh40k\RenderPatch\40K-Corruption-RenderPatch - Vanilla\Assemblies\40KPawnRenderer.pdb
+D:\Spiele\RimWorld1393Win\Mods\40K-Corruption-RenderPatch-1.0\Assemblies\40KPawnRenderer.dll
+D:\Spiele\RimWorld1393Win\Mods\40K-Corruption-RenderPatch-1.0\Assemblies\40KPawnRenderer.pdb
+D:\Spiele\RimWorld1393Win\Mods\40K-Corruption-RenderPatch-1.0\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.csprojResolveAssemblyReference.cache
+D:\Spiele\RimWorld1393Win\Mods\40K-Corruption-RenderPatch-1.0\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.dll
+D:\Spiele\RimWorld1393Win\Mods\40K-Corruption-RenderPatch-1.0\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.pdb
