@@ -22,7 +22,7 @@ namespace _40KPawnRenderer
         static HarmonyPatches()
         {
             HarmonyInstance harmony = HarmonyInstance.Create("rimworld.ohu.pawnRenderer.main");
-            harmony.Patch(AccessTools.Method(typeof(PawnRenderer), "RenderPawnInternal", new Type[] { typeof(Vector3), typeof(Quaternion), typeof(bool), typeof(Rot4), typeof(Rot4), typeof(RotDrawMode), typeof(bool) }), null, new HarmonyMethod(typeof(HarmonyPatches), nameof(RenderPawnInternal)), null);
+            harmony.Patch(AccessTools.Method(typeof(PawnRenderer), "RenderPawnInternal", new Type[] { typeof(Vector3), typeof(Quaternion), typeof(bool), typeof(Rot4), typeof(Rot4), typeof(RotDrawMode), typeof(bool), typeof(bool) }), null, new HarmonyMethod(typeof(HarmonyPatches), nameof(RenderPawnInternal)), null);
         }
 
         internal static List<HediffComp_DrawImplant> implantDrawers(Pawn pawn)
