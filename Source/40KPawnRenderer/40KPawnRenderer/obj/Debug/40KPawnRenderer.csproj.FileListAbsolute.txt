@@ -28,3 +28,9 @@ D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.1\As
 D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.1\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.csprojResolveAssemblyReference.cache
 D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.1\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.dll
 D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.1\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.pdb
+D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.2\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.csprojResolveAssemblyReference.cache
+D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.2\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.csproj.CoreCompileInputs.cache
+D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.2\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.dll
+D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.2\Source\40KPawnRenderer\40KPawnRenderer\obj\Debug\40KPawnRenderer.pdb
+D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.2\Assemblies\40KPawnRenderer.dll
+D:\Spiele\Steam\SteamApps\common\RimWorld\Mods\40K-Corruption-RenderPatch-1.2\Assemblies\40KPawnRenderer.pdb

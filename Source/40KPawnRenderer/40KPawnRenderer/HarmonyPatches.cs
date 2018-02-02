@@ -85,11 +85,11 @@ namespace _40KPawnRenderer
                         {
                             if (__instance.graphics.dessicatedGraphic.ShouldDrawRotated)
                             {
-                                mesh2 = MeshPool.GridPlane(portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.CustomPortraitDrawSize : alienDef.alienRace.generalSettings.alienPartGenerator.CustomDrawSize);
+                                mesh2 = MeshPool.GridPlane(portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.customPortraitDrawSize : alienDef.alienRace.generalSettings.alienPartGenerator.customDrawSize);
                             }
                             else
                             {
-                                Vector2 size = portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.CustomPortraitDrawSize : alienDef.alienRace.generalSettings.alienPartGenerator.CustomDrawSize;
+                                Vector2 size = portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.customPortraitDrawSize : alienDef.alienRace.generalSettings.alienPartGenerator.customDrawSize;
                                 if (bodyFacing.IsHorizontal)
                                 {
                                     size = size.Rotated();
@@ -103,7 +103,11 @@ namespace _40KPawnRenderer
                         }
                         else
                         {
-                            mesh = (portrait ? alienDef.alienRace.generalSettings.alienPartGenerator.bodyPortraitSet.MeshAt(bodyFacing) : alienDef.alienRace.generalSettings.alienPartGenerator.bodySet.MeshAt(bodyFacing));
+                            AlienPartGenerator.AlienComp comp = pawn.TryGetComp<AlienPartGenerator.AlienComp>();
+                            if (comp != null)
+                            {
+                                mesh = (portrait ? comp.alienPortraitGraphics.bodySet.MeshAt(bodyFacing) : comp.alienGraphics.bodySet.MeshAt(bodyFacing));
+                            }
                         }
                     }
                     else
@@ -205,22 +209,22 @@ namespace _40KPawnRenderer
                             Material pauldronMat;
                             if (CompPauldronDrawer.ShouldDrawPauldron(pawn, __instance.graphics.apparelGraphics[k].sourceApparel, bodyFacing, out pauldronMat))
                             {
-                                if (pawn.ageTracker.CurLifeStageIndex == 2)
-                                {
-                                    pauldronMat.mainTextureScale = new Vector2(1.00f, 1.22f);
-                                    pauldronMat.mainTextureOffset = new Vector2(0, -0.1f);
-                                }
+                                //if (pawn.ageTracker.CurLifeStageIndex == 2)
+                                //{
+                                //    pauldronMat.mainTextureScale = new Vector2(1.00f, 1.22f);
+                                //    pauldronMat.mainTextureOffset = new Vector2(0, -0.1f);
+                                //}
                                 vector.y += 0.035f;
                                 GenDraw.DrawMeshNowOrLater(mesh, vector, quat, pauldronMat, portrait);
                             }
-                            ApparelGraphicRecord apparelGraphicRecord = __instance.graphics.apparelGraphics[k];
-                            if (apparelGraphicRecord.sourceApparel.def.apparel.LastLayer == ApparelLayer.Shell)
-                            {
+                            //ApparelGraphicRecord apparelGraphicRecord = __instance.graphics.apparelGraphics[k];
+                            //if (apparelGraphicRecord.sourceApparel.def.apparel.LastLayer == ApparelLayer.Shell)
+                            //{
                      //           Material material2 = apparelGraphicRecord.graphic.MatAt(bodyFacing, null);
                      //           material2 = __instance.graphics.flasher.GetDamagedMat(material2);
                      //           GenDraw.DrawMeshNowOrLater(mesh, vector, quat, material2, portrait);
 
-                            }
+                            //}
                             if (!pawn.Dead)
                             {
                                 for (int l = 0; l < pawn.health.hediffSet.hediffs.Count; l++)

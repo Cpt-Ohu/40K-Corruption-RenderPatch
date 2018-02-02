@@ -45,11 +45,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Corruption">
-      <HintPath>..\..\..\..\YaWH40Km-Public_A16\Assemblies\Corruption.dll</HintPath>
+      <HintPath>..\..\..\..\Warhammer40k-Corruption-A17\Assemblies\Corruption.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FactionColors">
-      <HintPath>..\..\..\..\YaWH40Km-Public_A16\Assemblies\FactionColors.dll</HintPath>
+      <HintPath>..\..\..\..\Warhammer40k-Corruption-A17\Assemblies\FactionColors.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
